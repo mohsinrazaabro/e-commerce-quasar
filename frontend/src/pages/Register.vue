@@ -63,10 +63,13 @@ export default {
       return regex.test(pw);
     },
     onSubmit() {
+      this.email = this.email.toLowerCase();
       Axios.post("/user/create", {
-        username,
-        email,
-        password: confirmpassword
+        username: this.username,
+        email: this.email,
+        password: this.confirmpassword
+      }).then(res => {
+        console.log(res.data);
       });
     }
   }

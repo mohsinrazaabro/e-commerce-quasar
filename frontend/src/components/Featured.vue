@@ -7,6 +7,7 @@
       swipeable
       arrows
       navigation
+      height="260px"
       control-color="primary"
       v-model="mobSlide"
     >
@@ -23,7 +24,7 @@
             :key="card.id"
             class="col-lg-2 col-md-2 col-sm-4  col-xs-4 hover_border_grey text-center full-height"
           >
-            <div @click="$router.push(`/product/${card.id}`)">
+            <div @click="$router.push(`/product/${card.productid}`)">
               <q-img style="" class="rounded-borders" :src="card.imagelink">
               </q-img>
               <div>{{ card.title }}</div>
@@ -67,7 +68,7 @@
               :key="card.id"
               class="col-lg-2 col-md-2 col-sm-4  col-xs-12 hover_border_grey text-center full-height"
             >
-              <div @click="$router.push(`/product/${card.id}`)">
+              <div @click="$router.push(`/product/${card.productid}`)">
                 <q-img
                   style="width: 100%;"
                   class="rounded-borders"

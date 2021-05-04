@@ -13,7 +13,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          E Commerce Store
         </q-toolbar-title>
         <q-btn-group spread class="gt-sm">
           <q-btn unelevated v-if="isAdmin" label="Admin" to="/admin" />
@@ -57,7 +57,7 @@
     >
       <q-item clickable v-ripple to="/">
         <q-item-section avatar top>
-          <q-avatar icon="computer" color="primary" text-color="white" />
+          <q-avatar icon="home" color="primary" text-color="white" />
         </q-item-section>
 
         <q-item-section>
@@ -78,7 +78,7 @@
 
       <q-item clickable v-ripple to="/cart">
         <q-item-section avatar top>
-          <q-avatar icon="computer" color="primary" text-color="white" />
+          <q-avatar icon="shopping_cart" color="primary" text-color="white" />
         </q-item-section>
 
         <q-item-section>
@@ -87,9 +87,9 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable v-ripple :to="`/profile/${userId}`">
+      <q-item clickable v-ripple v-if="loggedIn" :to="`/profile/${userId}`">
         <q-item-section avatar top>
-          <q-avatar icon="computer" color="primary" text-color="white" />
+          <q-avatar icon="person" color="primary" text-color="white" />
         </q-item-section>
 
         <q-item-section>
@@ -143,6 +143,9 @@ export default {
     ...mapActions("page", ["setCartItems"]),
     updateCartNumber() {
       const items = JSON.parse(localStorage.getItem("cart"));
+      if (!items) {
+        localStorage.setItem("cart", JSON.stringify([]));
+      }
 
       this.cartItems = items.length;
       this.setCartItems(items.length);

@@ -7,8 +7,8 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
-//axios.defaults.baseURL = "http://e-commerce-mra.herokuapp.com";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "http://e-commerce-mra.herokuapp.com";
+//axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   "token"
 )}`;

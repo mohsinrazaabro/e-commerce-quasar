@@ -1,22 +1,34 @@
 <template>
   <div class="q-pa-md">
     <div class="row">
-      <div class="col-4">
+      <div class="col-md-12 col-sm-12">
+        <q-btn color="red" style="float: right" @click="logOut">logout</q-btn>
+      </div>
+      <div class="col-md-4 col-sm-6">
         <img
           width="80%"
           style="margin-top : 50px;"
           src="https://canberrasleepclinic.com.au/wp-content/uploads/2013/03/grey-avatar.png"
         />
       </div>
-      <div class="col-4 ">
-        <h6 class="line">Name: {{ profiledata.username }}</h6>
-        <h6 class="line">Email: {{ profiledata.email }}</h6>
-        <h6 class="line">Phone: {{ profiledata.phone }}</h6>
-        <h6 class="line">Address: {{ profiledata.address }}</h6>
-        <h6 v-if="!profiledata.isconfirmed">Please confirm your account!</h6>
-      </div>
-      <div class="col-4 ">
-        <q-btn color="red" style="float: right" @click="logOut">logout</q-btn>
+      <div class="col-md-4 col-sm-12"></div>
+      <div class="col-md-4 col-sm-12 line text-subtitle1">
+        <p>Name: {{ profiledata.username }}</p>
+        <hr />
+        <p>Email: {{ profiledata.email }}</p>
+        <hr />
+        <p>Phone: {{ profiledata.phone }}</p>
+        <hr />
+        <p>Address: {{ profiledata.address }}</p>
+
+        <h6 v-if="!profiledata.isconfirmed">
+          <hr />
+          Please confirm your account!
+        </h6>
+
+        <q-btn v-if="showResendButton" @click="resendEmail"
+          >Resend code to my email</q-btn
+        >
       </div>
     </div>
     <q-btn v-if="profiledata.isconfirmed" to="/postproduct" color="primary"
@@ -46,7 +58,8 @@ export default {
   data() {
     return {
       profiledata: [],
-      myProducts: []
+      myProducts: [],
+      showResendButton: false
     };
   },
   methods: {
@@ -54,6 +67,14 @@ export default {
       Axios.get(`/user/profile/${this.$route.params.profileid}`).then(res => {
         this.profiledata = res.data.user;
         this.myProducts = res.data.products;
+        this.showResendButton = !res.data.user.isconfirmed;
+        console.log(res.data);
+      });
+    },
+    resendEmail() {
+      Axios.get("/user/resendemail").then(res => {
+        console.log(res.data);
+        this.showResendButton = false;
       });
     },
     logOut() {
@@ -81,7 +102,8 @@ export default {
 .line {
   border: 1px solid black;
   padding: 5px;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 1px 15px 1px 15px;
   margin: 10px;
+  text-align: left;
 }
 </style>

@@ -1,40 +1,65 @@
 <template>
   <div class="q-pa-md">
     <div class="cart">
-      <q-list bordered padding class="rounded-borders" style="max-width: 900px">
+      <q-list bordered padding class="rounded-borders" style="max-width: 100%">
         <q-item-label header>Items in cart</q-item-label>
-
+        <div class="row">
+          <div class="col-md-2 col-sm-2 col-xs-2">
+            Picture
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-2">
+            Title
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-2">
+            price
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-4">
+            Quantity
+          </div>
+          <div class="col-md-2 col-sm-0 col-xs-0 gt-sm">
+            Total Price:
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-2">
+            Delete
+          </div>
+        </div>
         <div v-for="item in items" :key="item.id">
-          <q-item clickable v-ripple>
-            <q-item-section avatar top :to="`/product/${item.id}`">
+          <q-item class="row" clickable v-ripple>
+            <q-item-section
+              class="col-md-2 col-sm-2 col-xs-2"
+              avatar
+              top
+              :to="`/product/${item.id}`"
+            >
               <q-avatar icon="folder" color="primary" text-color="white" />
             </q-item-section>
 
-            <q-item-section @click="goToProduct(item.id)">
+            <q-item-section
+              class="col-md-2 col-sm-2 col-xs-2"
+              @click="goToProduct(item.id)"
+            >
               <q-item-label lines="1">{{ item.title }}</q-item-label>
             </q-item-section>
-            <q-item-section>
-              <q-item-label lines="1">Rs. {{ item.price }}</q-item-label>
+            <q-item-section class="col-md-2 col-sm-2 col-xs-2">
+              <q-item-label lines="1">{{ item.price }}</q-item-label>
             </q-item-section>
 
-            <q-item-section>
+            <q-item-section class="col-md-2 col-sm-3 col-xs-3">
               <q-input
                 v-model.number="item.qty"
                 type="number"
                 filled
                 style="max-width: 200px"
-                prefix="Qty: "
+                prefix=""
                 @click="updateCart"
               />
             </q-item-section>
 
-            <q-item-section>
-              <q-item-label lines="1"
-                >Total Rs. {{ item.price * item.qty }}</q-item-label
-              >
+            <q-item-section class="col-md-2 col-sm-0 col-xs-0 gt-sm">
+              <q-item-label>{{ item.price * item.qty }}</q-item-label>
             </q-item-section>
 
-            <q-item-section side>
+            <q-item-section side class="col-md-1 col-sm-2 col-xs-2">
               <q-icon @click="removeItem(item.id)" name="delete" color="red" />
             </q-item-section>
           </q-item>

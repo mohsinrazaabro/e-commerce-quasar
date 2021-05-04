@@ -92,12 +92,6 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-    <h6>{{ totalItems }}</h6>
-
-    {{ getCartItems }}
-
-    {{ $route.query.category }}
-    {{ $route.query.supplier }}
   </div>
 </template>
 

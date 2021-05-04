@@ -5,27 +5,25 @@
         <img style="width: 100%;" :src="product.imagelink" alt="" />
       </div>
       <br />
-      <div class="col-md-3 col-sm-6 my-font" style="margin-top: 50px;">
-        Title: <br />
-        Price:<br />
-        Description: <br />
-        Supplier: <br />
-        Category:<br />
-        Rating: <br />
-        Stock Left: <br />
-        Date Created
-      </div>
-      <div class="col-md-3 col-sm-6 my-font" style="margin-top: 50px;">
-        {{ product.title }}<br />
-        {{ product.price }}<br />
-        {{ product.description }} <br />
-        {{ product.supplier }} <br />
-        {{ product.category }} <br />
-        {{ product.stars }} <br />
-        {{ product.stockLeft }} <br />
-        {{ product.dateCreated }}
+
+      <div class="col-md-4 col-sm-12 col-xs-12 my-font">
+        <h3>{{ product.title }}</h3>
+        <p style="margin: 1em 1em 8em 1em;">{{ product.description }}</p>
+        <br />
+        Rating:
+        <q-rating
+          v-model="product.stars"
+          size="2em"
+          :max="10"
+          color="primary"
+        />
+
+        <h6>Price: ${{ product.price }}</h6>
+
+        Stock left: {{ product.stockLeft }} <br />
       </div>
     </div>
+
     <br />
     <br />
     <q-btn
@@ -39,6 +37,8 @@
       color="primary"
       >Add to Cart
     </q-btn>
+
+    <h6>More by supplier:</h6>
 
     <q-dialog v-model="cart_dialog" nb>
       <q-card style="width: 300px">
@@ -140,7 +140,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 .my-font {
   font-family: "Open Sans", sans-serif;

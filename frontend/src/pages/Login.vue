@@ -41,6 +41,11 @@ export default {
     };
   },
   methods: {
+    Notify(msg) {
+      this.$q.notify({
+        message: msg
+      });
+    },
     onSubmit() {
       this.$q.loading.show();
       this.$router.push("/");
@@ -58,6 +63,7 @@ export default {
             location.reload();
             this.timer = void 0;
           }, 800);
+          this.Notify(res.data.msg);
         } else {
           this.$q.notify({
             message: res.data.msg
